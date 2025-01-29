@@ -40,6 +40,27 @@ app.post('/clients', (req, res) => {
     });
 });
 
+
+
+app.get('/clients/:id', (req, res) => {
+    const clientId = parseInt(req.params.id);
+
+    fs.readFile(FILE_PATH, 'utf8', (err, data) => {
+        if (err) {
+            return res.status(500).json({ message: 'Error al leer el archivo' });
+        }
+
+        const clients = JSON.parse(data || '[]');
+        const client = clients.find(c => c.id === clientId);
+
+        if (!client) {
+            return res.status(404).json({ message: 'Cliente no encontrado' });
+        }
+
+        res.json(client);
+    });
+});
+
 // Iniciar el servidor
 const PORT = 5000;
 app.listen(PORT, () => {

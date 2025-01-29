@@ -3,6 +3,8 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
+import { element } from 'prop-types';
+import ClientProfile from '../views/clients/ClientProfile';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('../views/dashboard')));
@@ -41,6 +43,10 @@ const MainRoutes = {
     {
       path: 'clients',
       element: <ClientTable />
+    },
+    {
+      path: 'clients/:id',
+      element: <ClientProfile />
     },
     {
       path: 'utils',

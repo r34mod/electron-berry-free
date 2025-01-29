@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Button, Paper } from '@mui/material';
 import axios from 'axios';
+import {  useNavigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5000/clients';
 
@@ -10,6 +11,8 @@ const ClientTable = () => {
   const [newClient, setNewClient] = useState({ name: '', email: '', phone: '' });
   const [selectedClient, setSelectedClient] = useState(null);
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   // Cargar los clientes desde el almacenamiento local (simulando un archivo JSON)
   useEffect(() => {
@@ -44,17 +47,6 @@ const ClientTable = () => {
     }
 };
 
-// Abrir ficha del cliente
-const handleOpenClient = (client) => {
-    setSelectedClient(client);
-    setOpen(true);
-  };
-
-  // Cerrar modal
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedClient(null);
-  };
 
   return (
     <div>
@@ -108,10 +100,10 @@ const handleOpenClient = (client) => {
                 <TableCell>{client.email}</TableCell>
                 <TableCell>{client.phone}</TableCell>
                 <TableCell>
-                  <Button 
+                <Button 
                     variant="contained" 
                     color="secondary" 
-                    onClick={() => handleOpenClient(client)}
+                    onClick={() => navigate(`/clients/${client.id}`)}
                   >
                     Ver Ficha
                   </Button>
