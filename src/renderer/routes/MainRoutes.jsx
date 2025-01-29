@@ -17,6 +17,8 @@ const UtilsShadow = Loadable(lazy(() => import('../views/utilities/Shadow')));
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('../views/sample-page')));
 
+const ClientTable = Loadable(lazy(() => import('../views/clients/ClientTable')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -35,6 +37,10 @@ const MainRoutes = {
           element: <DashboardDefault />
         }
       ]
+    },
+    {
+      path: 'clients',
+      element: <ClientTable />
     },
     {
       path: 'utils',
