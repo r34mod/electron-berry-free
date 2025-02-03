@@ -8,7 +8,7 @@ const API_URL = 'http://localhost:5000/clients';
 const ClientTable = () => {
   // Estado para almacenar los clientes
   const [clients, setClients] = useState([]);
-  const [newClient, setNewClient] = useState({ name: '', email: '', phone: '' });
+  const [newClient, setNewClient] = useState({ name: '', email: '', phone: '', address: '' });
   const [selectedClient, setSelectedClient] = useState(null);
   const [open, setOpen] = useState(false);
 
@@ -89,6 +89,7 @@ const ClientTable = () => {
               <TableCell>Nombre</TableCell>
               <TableCell>Correo Electrónico</TableCell>
               <TableCell>Teléfono</TableCell>
+              <TableCell>Direccion</TableCell>
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
@@ -99,6 +100,7 @@ const ClientTable = () => {
                 <TableCell>{client.name}</TableCell>
                 <TableCell>{client.email}</TableCell>
                 <TableCell>{client.phone}</TableCell>
+                <TableCell>{client.address}</TableCell>
                 <TableCell>
                 <Button 
                     variant="contained" 

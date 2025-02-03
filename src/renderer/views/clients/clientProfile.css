@@ -1,0 +1,92 @@
+/* Ficha de Cliente */
+.client-card {
+    max-width: 800px;  /* Aumentamos el tamaño de la tarjeta */
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    padding-bottom: 30px;
+  }
+  
+  /* Título principal */
+  .client-card h4 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para las cajas de los datos del cliente */
+  .data-box {
+    background-color: #f4f4f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para los campos de datos */
+  .data-box strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .data-box p {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Botón para seleccionar archivo */
+  input[type="file"] {
+    display: none;  /* Ocultamos el botón de archivo predeterminado */
+  }
+  
+  .upload-button {
+    background-color: #f50057;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+  }
+  
+  .upload-button:hover {
+    background-color: #d4004d;
+  }
+  
+  /* Estilo para el grid de imágenes */
+  .grid-container {
+    margin-top: 20px;
+  }
+  
+  .grid-container img {
+    width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .grid-container img:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Estilo para el botón Volver */
+  .back-button {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  /* Modal para imagen grande */
+  .modal-image {
+    width: 80%;
+    height: auto;
+    border-radius: 8px;
+    cursor: zoom-out;
+  }
