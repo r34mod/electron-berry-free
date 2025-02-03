@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -24,6 +24,8 @@ import ChartDataYear from './chart-data/total-order-year-line-chart';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
+import axios from 'axios';
+
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
@@ -42,8 +44,24 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
     setTimeValue(newValue);
   };
 
+  const [expenses, setExpenses] = useState(null);
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
+
+  const fetchExpenses = async () => {
+    try{
+      const response = await axios.get('http://localhost:5000/expenses');
+      const totalOrders = response.data.reduce((sum, item) => sum + Number(item.amount), 0);
+      setExpenses(totalOrders);
+    }catch(error){
+      console.error('Error al obtener gastos:', error);
+    }
+  }
+
   // Calcular el total de ganancias
-  const totalOrders = orders.reduce((sum, item) => sum + item.amount, 0);
 
   // Agregar una nueva ganancia
   const addOrder = () => {
@@ -143,13 +161,10 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                     <Grid container alignItems="center">
                       <Grid item>
                         {timeValue ? (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$108</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{expenses} €</Typography>
                         ) : (
-                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>$961</Typography>
+                          <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>{expenses} €</Typography>
                         )}
-                        <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                          ${totalOrders.toFixed(2)}
-                        </Typography>
                       </Grid>
                       <Grid item>
                         <Avatar
@@ -171,25 +186,11 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                             color: 'primary.200'
                           }}
                         >
-                          Total Order
+                          Gasto Total
                         </Typography>
                       </Grid>
 
-                      {/* Sección para agregar nuevos gastos */}
-                      <Grid item sx={{ mt: 2 }}>
-                        <TextField
-                          label="Nuevo gasto" 
-                          type="number"
-                          value={newOrders}
-                          onChange={(e) => setNewOrders(e.target.value)}
-                          variant="outlined"
-                          fullWidth
-                          sx={{ mb: 2 }}
-                        />
-                        <Button onClick={addOrder} variant="contained" color="primary">
-                          Agregar Gasto
-                        </Button>
-                      </Grid>
+                      
                     </Grid>
                   </Grid>
                   <Grid item xs={6}>

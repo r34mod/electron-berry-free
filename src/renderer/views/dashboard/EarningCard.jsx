@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -25,6 +25,8 @@ import FileCopyTwoToneIcon from '@mui/icons-material/FileCopyOutlined';
 import PictureAsPdfTwoToneIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import ArchiveTwoToneIcon from '@mui/icons-material/ArchiveOutlined';
 
+import axios from 'axios';
+
 // ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
 
 const EarningCard = ({ isLoading }) => {
@@ -35,9 +37,24 @@ const EarningCard = ({ isLoading }) => {
   ]);
   const [newEarning, setNewEarning] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
+  const [profit, setProfit] = useState(null);
+  
+  useEffect(() => {
+    fetchProfit();
+  }, []);
 
+  const fetchProfit = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/profit`);
+      
+      // Sumar todos los valores de profit
+      const totalProfit = response.data.reduce((acc, item) =>  acc + Number(item.amount), 0);
+      setProfit(totalProfit);
+    } catch (error) {
+      console.error('Error al obtener beneficios:', error);
+    }
+  };
   // Calcular el total de ganancias
-  const totalEarnings = earnings.reduce((sum, item) => sum + item.amount, 0);
 
   // Manejar el menú
   const handleClick = (event) => {
@@ -162,7 +179,7 @@ const EarningCard = ({ isLoading }) => {
                 <Grid container alignItems="center">
                   <Grid item>
                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                      ${totalEarnings.toFixed(2)}
+                      {profit} €
                     </Typography>
                   </Grid>
                   <Grid item>
@@ -179,27 +196,19 @@ const EarningCard = ({ isLoading }) => {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item sx={{ mb: 1.25 }}>
-                <Typography sx={{ fontSize: '1rem', fontWeight: 500, color: 'secondary.200' }}>
-                  Total Earning
-                </Typography>
-              </Grid>
-
-              {/* Sección para agregar nuevos beneficios */}
-              <Grid item sx={{ mt: 2 }}>
-                <TextField
-                  label="Nuevo beneficio"
-                  type="number"
-                  value={newEarning}
-                  onChange={(e) => setNewEarning(e.target.value)}
-                  variant="outlined"
-                  fullWidth
-                  sx={{ mb: 2 }}
-                />
-                <Button onClick={addEarning} variant="contained" color="primary">
-                  Agregar Beneficio
-                </Button>
-              </Grid>
+              
+              
+              <Grid item xs={12}>
+                        <Typography
+                          sx={{
+                            fontSize: '1rem',
+                            fontWeight: 500,
+                            color: 'primary.200'
+                          }}
+                        >
+                          Beneficio Total
+                        </Typography>
+                  </Grid>
             </Grid>
           </Box>
         </MainCard>
