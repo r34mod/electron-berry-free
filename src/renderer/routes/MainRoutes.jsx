@@ -5,6 +5,7 @@ import MainLayout from '../layout/MainLayout';
 import Loadable from '../ui-component/Loadable';
 import { element } from 'prop-types';
 import ClientProfile from '../views/clients/ClientProfile';
+import OrderForm from '../views/orders/OrderForm';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('../views/dashboard')));
@@ -20,6 +21,10 @@ const UtilsShadow = Loadable(lazy(() => import('../views/utilities/Shadow')));
 const SamplePage = Loadable(lazy(() => import('../views/sample-page')));
 
 const ClientTable = Loadable(lazy(() => import('../views/clients/ClientTable')));
+
+const Expenses = Loadable(lazy(() => import('../views/expenses/Expenses')));
+
+const Profit = Loadable(lazy(() => import('../views/profit/Profit')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -47,6 +52,18 @@ const MainRoutes = {
     {
       path: 'clients/:id',
       element: <ClientProfile />
+    },
+    {
+      path: 'expenses',
+      element: <Expenses />
+    },
+    {
+      path: 'profit',
+      element: <Profit />
+    },
+    {
+      path: 'orders',
+      element: <OrderForm />
     },
     {
       path: 'utils',
