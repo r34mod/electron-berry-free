@@ -1,0 +1,27 @@
+[
+  {
+    "amount": "455",
+    "description": "Prueba",
+    "date": "2025-01-16"
+  },
+  {
+    "amount": "67",
+    "description": "Prueba 2",
+    "date": "2025-03-05"
+  },
+  {
+    "amount": "9928",
+    "description": "Hh",
+    "date": "2025-03-12"
+  },
+  {
+    "amount": "100",
+    "description": "Prueba iva",
+    "date": "2025-06-18"
+  },
+  {
+    "amount": "8372",
+    "description": "Prueba iva 2",
+    "date": "2025-02-26"
+  }
+]
